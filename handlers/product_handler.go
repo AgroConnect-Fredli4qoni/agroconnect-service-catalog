@@ -82,6 +82,7 @@ func (h *ProductHandler) CreateProduct(w http.ResponseWriter, r *http.Request) {
 		FarmerName:   dto.FarmerName,
 		IsOrganic:    dto.IsOrganic,
 		Description:  dto.Description,
+		ImageURL:     dto.ImageURL,
 	}
 
 	if err := h.repo.Create(r.Context(), &product); err != nil {

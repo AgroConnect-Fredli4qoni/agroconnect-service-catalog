@@ -17,6 +17,7 @@ type Product struct {
 	FarmerName   string             `json:"farmer_name" bson:"farmer_name"`
 	IsOrganic    bool               `json:"is_organic" bson:"is_organic"`
 	Description  string             `json:"description" bson:"description"`
+	ImageURL     string             `json:"image_url,omitempty" bson:"image_url,omitempty"`
 	CreatedAt    time.Time          `json:"created_at" bson:"created_at"`
 }
 
@@ -30,6 +31,7 @@ type CreateProductDTO struct {
 	FarmerName   string  `json:"farmer_name"`
 	IsOrganic    bool    `json:"is_organic"`
 	Description  string  `json:"description"`
+	ImageURL     string  `json:"image_url,omitempty"`
 }
 
 type StockUpdateDTO struct {
