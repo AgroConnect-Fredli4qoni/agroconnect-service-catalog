@@ -14,6 +14,7 @@ type Product struct {
 	StockKg         int                `json:"stock_kg" bson:"stock_kg"`
 	Unit            string             `json:"unit" bson:"unit"`
 	OriginRegion    string             `json:"origin_region" bson:"origin_region"`
+	FarmerID        int                `json:"farmer_id,omitempty" bson:"farmer_id,omitempty"`
 	FarmerName      string             `json:"farmer_name" bson:"farmer_name"`
 	FarmerAvatarURL string             `json:"farmer_avatar_url,omitempty" bson:"farmer_avatar_url,omitempty"`
 	IsOrganic       bool               `json:"is_organic" bson:"is_organic"`
@@ -29,8 +30,21 @@ type CreateProductDTO struct {
 	StockKg         int     `json:"stock_kg"`
 	Unit            string  `json:"unit"`
 	OriginRegion    string  `json:"origin_region"`
+	FarmerID        int     `json:"farmer_id,omitempty"`
 	FarmerName      string  `json:"farmer_name"`
 	FarmerAvatarURL string  `json:"farmer_avatar_url,omitempty"`
+	IsOrganic       bool    `json:"is_organic"`
+	Description     string  `json:"description"`
+	ImageURL        string  `json:"image_url,omitempty"`
+}
+
+type UpdateProductDTO struct {
+	Name            string  `json:"name"`
+	Category        string  `json:"category"`
+	PricePerKg      float64 `json:"price_per_kg"`
+	StockKg         int     `json:"stock_kg"`
+	Unit            string  `json:"unit"`
+	OriginRegion    string  `json:"origin_region"`
 	IsOrganic       bool    `json:"is_organic"`
 	Description     string  `json:"description"`
 	ImageURL        string  `json:"image_url,omitempty"`

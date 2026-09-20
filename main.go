@@ -71,6 +71,7 @@ func main() {
 	api.HandleFunc("/products", productHandler.GetAllProducts).Methods("GET")
 	api.HandleFunc("/products", productHandler.CreateProduct).Methods("POST")
 	api.HandleFunc("/products/{id}", productHandler.GetProductByID).Methods("GET")
+	api.HandleFunc("/products/{id}", productHandler.UpdateProduct).Methods("PUT")
 	api.HandleFunc("/products/{id}", productHandler.DeleteProduct).Methods("DELETE")
 	api.HandleFunc("/products/{id}/stock", productHandler.DeductProductStock).Methods("PATCH")
 	api.HandleFunc("/farmers", farmerHandler.GetAllFarmers).Methods("GET")

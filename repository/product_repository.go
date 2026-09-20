@@ -16,6 +16,7 @@ type ProductRepository interface {
 	FindAll(ctx context.Context, search, category string) ([]models.Product, error)
 	FindByID(ctx context.Context, id string) (*models.Product, error)
 	Create(ctx context.Context, product *models.Product) error
+	Update(ctx context.Context, id string, product *models.Product) error
 	Delete(ctx context.Context, id string) error
 	DeductStock(ctx context.Context, id string, quantity int) error
 }
@@ -129,3 +130,34 @@ func (r *mongoProductRepository) DeductStock(ctx context.Context, id string, qua
 	}
 	return nil
 }
+
+func (r *mongoProductRepository) Update(ctx context.Context, id string, product *models.Product) error {
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return errors.New("invalid product id format")
+	}
+
+	update := bson.M{
+		"$set": bson.M{
+			"name":          product.Name,
+			"category":      product.Category,
+			"price_per_kg":  product.PricePerKg,
+			"stock_kg":      product.StockKg,
+			"unit":          product.Unit,
+			"origin_region": product.OriginRegion,
+			"is_organic":    product.IsOrganic,
+			"description":   product.Description,
+			"image_url":     product.ImageURL,
+		},
+	}
+
+	res, err := r.collection.UpdateOne(ctx, bson.M{"_id": objID}, update)
+	if err != nil {
+		return err
+	}
+	if res.MatchedCount == 0 {
+		return errors.New("product not found to update")
+	}
+	return nil
+}
+
