@@ -79,10 +79,11 @@ func (h *ProductHandler) CreateProduct(w http.ResponseWriter, r *http.Request) {
 		StockKg:      dto.StockKg,
 		Unit:         unit,
 		OriginRegion: dto.OriginRegion,
-		FarmerName:   dto.FarmerName,
-		IsOrganic:    dto.IsOrganic,
-		Description:  dto.Description,
-		ImageURL:     dto.ImageURL,
+		FarmerName:      dto.FarmerName,
+		FarmerAvatarURL: dto.FarmerAvatarURL,
+		IsOrganic:       dto.IsOrganic,
+		Description:     dto.Description,
+		ImageURL:        dto.ImageURL,
 	}
 
 	if err := h.repo.Create(r.Context(), &product); err != nil {
