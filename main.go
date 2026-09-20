@@ -51,6 +51,8 @@ func main() {
 	db := client.Database(mongoDBName)
 	productRepo := repository.NewProductRepository(db)
 	productHandler := handlers.NewProductHandler(productRepo)
+	farmerRepo := repository.NewFarmerRepository(db)
+	farmerHandler := handlers.NewFarmerHandler(farmerRepo)
 
 	router := mux.NewRouter()
 
@@ -71,6 +73,9 @@ func main() {
 	api.HandleFunc("/products/{id}", productHandler.GetProductByID).Methods("GET")
 	api.HandleFunc("/products/{id}", productHandler.DeleteProduct).Methods("DELETE")
 	api.HandleFunc("/products/{id}/stock", productHandler.DeductProductStock).Methods("PATCH")
+	api.HandleFunc("/farmers", farmerHandler.GetAllFarmers).Methods("GET")
+	api.HandleFunc("/farmers", farmerHandler.CreateFarmer).Methods("POST")
+	api.HandleFunc("/farmers/{slug}", farmerHandler.GetFarmerBySlug).Methods("GET")
 
 	corsHandler := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
